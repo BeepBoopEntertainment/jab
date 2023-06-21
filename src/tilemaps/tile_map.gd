@@ -3,8 +3,8 @@ extends TileMap
 var moisture = FastNoiseLite.new()
 var temperature = FastNoiseLite.new()
 var altitude = FastNoiseLite.new()
-var width = 256
-var height = 256
+var width = 120
+var height = 120
 
 const LayerIds = {
 	BASE = 0,
@@ -15,7 +15,7 @@ const SourceIds = {
 	FARMLANDS = 0,
 	WETLANDS  = 1
 }
-#@onready var player = get_parent().get_child(1)
+@onready var player = get_parent().get_child(0).get_child(0)
 
 func _ready():
 	moisture.seed = randi()
@@ -24,8 +24,8 @@ func _ready():
 	altitude.frequency = 0.005
 
 
-func _process(delta):
-	generate_chunk(Vector2(1,1))
+func _process(_delta):
+	generate_chunk(player.position)
 
 
 func map_environment_to_tile(alt: float, moist: float, temp: float):
@@ -63,8 +63,8 @@ func map_environment_to_tile(alt: float, moist: float, temp: float):
 
 
 func get_environment(tile_pos, x, y):
-	var xnoise: float = tile_pos.x-width/2 + x
-	var ynoise: float = tile_pos.y-height/2 + y
+	var xnoise: int = tile_pos.x-width/2 + x
+	var ynoise: int = tile_pos.y-height/2 + y
 	var moist: float = moisture.get_noise_2d(xnoise, ynoise)*10
 	var temp: float = temperature.get_noise_2d(xnoise, ynoise)*10
 	var alt: float = altitude.get_noise_2d(xnoise, ynoise)*10
@@ -77,8 +77,8 @@ func get_environment(tile_pos, x, y):
 	}
 
 
-func generate_chunk(position):
-	var tile_pos = local_to_map(position)
+func generate_chunk(player_position):
+	var tile_pos = local_to_map(player_position)
 	for x in range(width):
 		for y in range(height):
 			var environment = get_environment(tile_pos, x, y)
