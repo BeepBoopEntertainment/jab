@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjfatvgg5jq8u"]
+[gd_scene load_steps=7 format=3 uid="uid://cjfatvgg5jq8u"]
 
 [ext_resource type="Texture2D" uid="uid://ypeafowjxw78" path="res://assets/farmland/48x48.png" id="1_u2b25"]
 [ext_resource type="Texture2D" uid="uid://76bw0aiynipl" path="res://assets/wetlands/48x48.png" id="2_t71jj"]
+[ext_resource type="Script" path="res://src/tilemaps/tile_map.gd" id="3_ulmgy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pidak"]
 texture = ExtResource("1_u2b25")
@@ -704,3 +705,4 @@ sources/1 = SubResource("TileSetAtlasSource_3mn5b")
 tile_set = SubResource("TileSet_v6u85")
 cell_quadrant_size = 48
 format = 2
+script = ExtResource("3_ulmgy")

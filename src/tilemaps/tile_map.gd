@@ -25,10 +25,14 @@ func generate_chunk(position):
 			var moist = moisture.get_noise_2d(tile_pos.x-width/2 + x, tile_pos.y-height/2 + y)*10
 			var temp = temperature.get_noise_2d(tile_pos.x-width/2 + x, tile_pos.y-height/2 + y)*10
 			var alt = abs(altitude.get_noise_2d(tile_pos.x-width/2 + x, tile_pos.y-height/2 + y)*10)
-			var rand_num = randi_range(0, 3)
-			print_debug(alt)
+			var coord = Vector2i(tile_pos.x-width/2 + x, tile_pos.y-height/2 + y)
+			# create enum mapping for Vector2 calls below.
 			
-			if alt < 2.5:
-				set_cell(0, Vector2i(tile_pos.x-width/2 + x, tile_pos.y-height/2 + y), 0, Vector2(2,0))
+			
+			if alt < 2.5 and moist > 1:
+				set_cell(0, coord, 0, Vector2(2,0))
+			elif moist < 1:
+				set_cell(0, coord, 1, Vector2(2,2))
 			else:
-				set_cell(0, Vector2i(tile_pos.x-width/2 + x, tile_pos.y-height/2 + y), 0, Vector2(5,0))
+				set_cell(0, coord, 1, Vector2(20,2))
+
