@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Jab"
-run/main_scene="res://tile_map.tscn"
+run/main_scene="res://src/tilemaps/tile_map.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/mode=3
 
 [rendering]
 

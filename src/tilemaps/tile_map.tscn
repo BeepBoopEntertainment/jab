@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cjfatvgg5jq8u"]
+[gd_scene load_steps=14 format=3 uid="uid://cjfatvgg5jq8u"]
 
 [ext_resource type="Texture2D" uid="uid://ypeafowjxw78" path="res://assets/farmland/48x48.png" id="1_u2b25"]
 [ext_resource type="Texture2D" uid="uid://76bw0aiynipl" path="res://assets/wetlands/48x48.png" id="2_t71jj"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://src/tilemaps/tile_map.gd" id="3_ulmgy"]
 [ext_resource type="Texture2D" uid="uid://c1d380retkokf" path="res://assets/winterland/48x48.png" id="4_3oy02"]
 [ext_resource type="Texture2D" uid="uid://cayn08dc3gkcu" path="res://assets/darkland/48x48.png" id="5_whj0c"]
+[ext_resource type="PackedScene" uid="uid://bfxf5v5dyawxd" path="res://src/player/player.tscn" id="7_hbyck"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pidak"]
 texture = ExtResource("1_u2b25")
@@ -1645,3 +1646,5 @@ tile_set = SubResource("TileSet_v6u85")
 cell_quadrant_size = 48
 format = 2
 script = ExtResource("3_ulmgy")
+
+[node name="player" parent="." instance=ExtResource("7_hbyck")]
