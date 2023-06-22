@@ -14,39 +14,39 @@ const LayerIds = {
 
 const SourceIds = {
 	FARMLANDS = {
-		"atlas_id": 0,
+		"atlas_id": 2,
 		"ground0": Vector2(2,0),
 		"ground1": Vector2(3,0),
 		"ground2": Vector2(5,0),
 		"ground3": Vector2(6,0)
 	},
 	DRYLANDS = {
-		"atlas_id": 1,
+		"atlas_id": 8,
 		"ground0": Vector2(2,1),
 		"ground1": Vector2(2,2),
 		"ground2": Vector2(3,1),
 		"ground3": Vector2(4,1)
 	},
 	WETLANDS = {
-		"atlas_id": 1,
+		"atlas_id": 8,
 		"ground0": Vector2(27,1),
 		"ground1": Vector2(30,1),
 		"ground2": Vector2(27,4)
 	},
 	CAVE = {
-		"atlas_id": 3,
+		"atlas_id": 7,
 		"ground0": Vector2(3,2),
 		"ground1": Vector2(4,2),
 		"ground2": Vector2(3,3),
 		"ground3": Vector2(5,2)
 	},
 	WINTERLANDS = {
-		"atlas_id": 4,
+		"atlas_id": 9,
 		"ground0": Vector2(0,1),
 		"ground1": Vector2(0,0),
 	},
 	UNDERWORLD = {
-		"atlas_id": 5,
+		"atlas_id": 6,
 		"ground0": Vector2(12,3),
 		"ground1": Vector2(13,3),
 		"ground2": Vector2(14,3),
