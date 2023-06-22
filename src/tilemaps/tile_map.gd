@@ -3,6 +3,7 @@ extends TileMap
 var moisture = FastNoiseLite.new()
 var temperature = FastNoiseLite.new()
 var altitude = FastNoiseLite.new()
+var trees = FastNoiseLite.new()
 var width = 120
 var height = 120
 
@@ -18,7 +19,8 @@ const SourceIds = {
 		"ground0": Vector2(2,0),
 		"ground1": Vector2(3,0),
 		"ground2": Vector2(5,0),
-		"ground3": Vector2(6,0)
+		"ground3": Vector2(6,0),
+		"round_tree": Vector2(0,7)
 	},
 	DRYLANDS = {
 		"atlas_id": 8,
@@ -44,6 +46,11 @@ const SourceIds = {
 		"atlas_id": 9,
 		"ground0": Vector2(0,1),
 		"ground1": Vector2(0,0),
+		"snowy_round_tree": Vector2(8,0),
+		"pine_tree": Vector2(11,4),
+		"snowy_pine_tree": Vector2(8,4),
+		"snowy_rock": Vector2(1,0),
+		"snowy_rock_big": Vector2(2,0)
 	},
 	UNDERWORLD = {
 		"atlas_id": 6,
@@ -63,13 +70,15 @@ func _ready():
 	temperature.seed = randi()
 	altitude.seed = randi()
 	altitude.frequency = 0.005
+	trees.seed = randi()
+	trees.frequency = 0.1
 
 
 func _process(_delta):
 	generate_chunk(player.position)
 
 
-func map_environment_to_tile(alt: float, moist: float, temp: float):
+func map_environment_to_tile(alt: float, moist: float, temp: float, tree: float):
 	var source_id: int = SourceIds.FARMLANDS.atlas_id
 	var at_coord: Vector2 = Vector2(1,1)
 	
@@ -90,7 +99,10 @@ func map_environment_to_tile(alt: float, moist: float, temp: float):
 		at_coord = SourceIds.FARMLANDS["ground1"]
 		source_id = SourceIds.FARMLANDS.atlas_id
 	elif moist > 1 and temp > 2:
-		at_coord = SourceIds.FARMLANDS["ground2"]
+		if tree > 4:
+			at_coord = SourceIds.FARMLANDS["round_tree"]
+		else:
+			at_coord = SourceIds.FARMLANDS["ground2"]
 		source_id = SourceIds.FARMLANDS.atlas_id
 	elif moist <= 1 and temp > 2:
 		at_coord = SourceIds.FARMLANDS["ground3"]
@@ -111,12 +123,14 @@ func get_environment(tile_pos, x, y):
 	var moist: float = moisture.get_noise_2d(xnoise, ynoise)*10
 	var temp: float = temperature.get_noise_2d(xnoise, ynoise)*10
 	var alt: float = altitude.get_noise_2d(xnoise, ynoise)*10
+	var tree: float = trees.get_noise_2d(xnoise, ynoise)*10
 	
 	return {
 		alt   = alt,
 		coord = Vector2i(xnoise, ynoise),
 		moist = moist,
-		temp  = temp
+		temp  = temp,
+		tree = tree
 	}
 
 
@@ -129,7 +143,8 @@ func generate_chunk(player_position):
 			var tile = map_environment_to_tile(
 				environment.alt,
 				environment.moist,
-				environment.temp
+				environment.temp,
+				environment.tree
 			)
 				
 			set_cell(layer_id, environment.coord, tile.source, tile.coord)
