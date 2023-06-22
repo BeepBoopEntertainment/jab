@@ -11,10 +11,51 @@ const LayerIds = {
 	OBJECT = 1
 }
 
+
 const SourceIds = {
-	FARMLANDS = 0,
-	WETLANDS  = 1
+	FARMLANDS = {
+		"atlas_id": 0,
+		"ground0": Vector2(2,0),
+		"ground1": Vector2(3,0),
+		"ground2": Vector2(5,0),
+		"ground3": Vector2(6,0)
+	},
+	DRYLANDS = {
+		"atlas_id": 1,
+		"ground0": Vector2(2,1),
+		"ground1": Vector2(2,2),
+		"ground2": Vector2(3,1),
+		"ground3": Vector2(4,1)
+	},
+	WETLANDS = {
+		"atlas_id": 1,
+		"ground0": Vector2(27,1),
+		"ground1": Vector2(30,1),
+		"ground2": Vector2(27,4)
+	},
+	CAVE = {
+		"atlas_id": 3,
+		"ground0": Vector2(3,2),
+		"ground1": Vector2(4,2),
+		"ground2": Vector2(3,3),
+		"ground3": Vector2(5,2)
+	},
+	WINTERLANDS = {
+		"atlas_id": 4,
+		"ground0": Vector2(0,1),
+		"ground1": Vector2(0,0),
+	},
+	UNDERWORLD = {
+		"atlas_id": 5,
+		"ground0": Vector2(12,3),
+		"ground1": Vector2(13,3),
+		"ground2": Vector2(14,3),
+		"ground3": Vector2(12,4)
+	}
 }
+
+
+
 @onready var player = get_parent().get_child(0).get_child(0)
 
 func _ready():
@@ -29,32 +70,34 @@ func _process(_delta):
 
 
 func map_environment_to_tile(alt: float, moist: float, temp: float):
-	var source_id: int = SourceIds.FARMLANDS
+	var source_id: int = SourceIds.FARMLANDS.atlas_id
 	var at_coord: Vector2 = Vector2(1,1)
+	
+	
 	if alt < -3 and moist > 4 and temp > -3:
-		at_coord = Vector2(30,1)
-		source_id = SourceIds.WETLANDS
+		at_coord = SourceIds.WETLANDS["ground0"]
+		source_id = SourceIds.WETLANDS.atlas_id
 	elif alt <= -3 and moist > 4 and temp <= -3:
-		at_coord = Vector2(27,4)
-		source_id = SourceIds.WETLANDS
+		at_coord = SourceIds.WETLANDS["ground1"]
+		source_id = SourceIds.WETLANDS.atlas_id
 	elif moist > 4 and temp > -3 and alt > -3:
-		at_coord = Vector2(4,1)
-		source_id = SourceIds.WETLANDS
+		at_coord = SourceIds.DRYLANDS["ground0"]
+		source_id = SourceIds.DRYLANDS.atlas_id
 	elif alt > -3 and moist <= 4 and temp > -3 and temp <= -1:
-		at_coord = Vector2(2,0)
-		source_id = SourceIds.FARMLANDS
+		at_coord = SourceIds.FARMLANDS["ground0"]
+		source_id = SourceIds.FARMLANDS.atlas_id
 	elif alt > -3 and moist <= 4 and temp > -1 and temp <= 0:
-		at_coord = Vector2(3,0)
-		source_id = SourceIds.FARMLANDS
+		at_coord = SourceIds.FARMLANDS["ground1"]
+		source_id = SourceIds.FARMLANDS.atlas_id
 	elif moist > 1 and temp > 2:
-		at_coord = Vector2(0,0)
-		source_id = SourceIds.FARMLANDS
+		at_coord = SourceIds.FARMLANDS["ground2"]
+		source_id = SourceIds.FARMLANDS.atlas_id
 	elif moist <= 1 and temp > 2:
-		at_coord = Vector2(1,0)
-		source_id = SourceIds.FARMLANDS
+		at_coord = SourceIds.FARMLANDS["ground3"]
+		source_id = SourceIds.FARMLANDS.atlas_id
 	else:
-		at_coord = Vector2(4,1)
-		source_id = SourceIds.WETLANDS
+		at_coord = SourceIds.DRYLANDS["ground1"]
+		source_id = SourceIds.DRYLANDS.atlas_id
 	
 	return {
 		coord  = at_coord,
