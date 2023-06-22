@@ -6,25 +6,21 @@ func _physics_process(_delta):
 	velocity.x = Input.get_axis("ui_left", "ui_right")
 	velocity.y = Input.get_axis("ui_up", "ui_down")
 	velocity = velocity.normalized() * SPEED
-	var pressed_key = false
+	
+	var selected = null
 	if Input.is_key_pressed(KEY_UP):
-		$AnimatedSprite2D.play("forward")
-		$AnimatedSprite2D.speed_scale = 1
-		pressed_key = true
+		selected = "forward"
 	if Input.is_key_pressed(KEY_DOWN):
-		$AnimatedSprite2D.play("backward")
-		$AnimatedSprite2D.speed_scale = 1
-		pressed_key = true
+		selected = "backward"
 	if Input.is_key_pressed(KEY_LEFT):
-		$AnimatedSprite2D.play("left")
-		$AnimatedSprite2D.speed_scale = 1
-		pressed_key = true
+		selected = "left"
 	if Input.is_key_pressed(KEY_RIGHT):
-		$AnimatedSprite2D.play("right")
-		$AnimatedSprite2D.speed_scale = 1
-		pressed_key = true
+		selected = "right"
 		
-	if !pressed_key:
+	if selected == null:
 		$AnimatedSprite2D.speed_scale = 0
+	else:
+		$AnimatedSprite2D.play(selected)
+		$AnimatedSprite2D.speed_scale = 1
 	
 	move_and_slide()
