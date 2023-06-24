@@ -82,6 +82,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_110y6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bp3sn")
 }],
 "loop": true,
 "name": &"forward",
@@ -96,6 +99,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ojqvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecucu")
 }],
 "loop": true,
 "name": &"left",
@@ -110,6 +116,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oc6qc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l23ho")
 }],
 "loop": true,
 "name": &"right",
@@ -129,6 +138,5 @@ zoom = Vector2(3, 3)
 position = Vector2(0, -4.76837e-07)
 scale = Vector2(0.666667, 0.670213)
 sprite_frames = SubResource("SpriteFrames_hqrca")
-animation = &"backward"
-frame_progress = 0.216222
+animation = &"right"
 speed_scale = 2.08165e-12
