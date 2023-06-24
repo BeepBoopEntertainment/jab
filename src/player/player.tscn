@@ -65,6 +65,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wfvat")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffp55")
 }],
 "loop": true,
 "name": &"backward",
